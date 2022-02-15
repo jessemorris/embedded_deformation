@@ -1,7 +1,7 @@
 # input output file path data
 io_files:
   input_ply: "../data/input.ply"
-  pointwise_correspondence: "../data/FAUST_dabing.csv"
+  pointwise_correspondence: "../data/FAUST_basic_test.csv"
   
   # for cases where the graph is provided
   # pointwise_correspondence: "../data/drill_rotation.csv"
@@ -22,7 +22,7 @@ general_params:
 # Parameters for the embedded_deformation
 embedded_deformation:
   # if true: load mesh; else: load pointCloud;
-  use_mesh: false
+  use_mesh: true
 
   # needs the previous flag set as true 
   use_geodesic: false
@@ -32,7 +32,7 @@ embedded_deformation:
   use_voxel_grid_sampling: true
   use_relative: true
   grid_size: 0.03
-  grid_resolution: 40
+  grid_resolution: 20
   graph_connectivity: 6
 
   # cost function weights

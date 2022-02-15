@@ -51,6 +51,12 @@ std::cout << "Progress: load file ...";
 
     readPLY(opts.path_input_file ,V, F);
 
+    std::cout << "Vertices shape " << "ROWS " << V.rows() << " COLS " << V.cols() << std::endl;
+    std::cout << "Faces shape " << "ROWS " << F.rows() << " COLS " << F.cols() << std::endl;
+    std::cout << "Nodes shape " << "ROWS " << N.rows() << " COLS " << N.cols() << std::endl;
+    std::cout << "Edges shape " << "ROWS " << E.rows() << " COLS " << E.cols() << std::endl;
+    // std::cout << F << std::endl;
+
 std::cout << " done.\n";
 
     // check for error
@@ -90,11 +96,14 @@ std::cout << " done.\n";
     // read correspondences
     Eigen::MatrixXd correspondences = read_csv<Eigen::MatrixXd>(opts.path_pairwise_correspondence);
     Eigen::MatrixXd new_points = correspondences.rightCols(3).transpose();
+    std::cout << "new points\n" << new_points << std::endl;
     Eigen::MatrixXd old_points = correspondences.leftCols(3).transpose();
+    std::cout << "old points\n" << old_points << std::endl;
 
     std::cout << "progress : start deformation ..." << std::endl;
     Eigen::MatrixXd V_deformed;
     non_rigid_deformation->deform(old_points, new_points, V_deformed);
+    std::cout << "ROWS " << V_deformed.rows() << " COLS " << V_deformed.cols() << std::endl;  
 
     if (opts.visualization)
         if (F.rows() != 0)

@@ -61,6 +61,11 @@ find_package(Eigen3 REQUIRED)
 find_package(yaml-cpp REQUIRED)
 
 find_package(Ceres REQUIRED)
+find_package(Open3D REQUIRED)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${Open3D_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Open3D_CXX_FLAGS}")
+link_directories(${Open3D_LIBRARY_DIRS})
 
 
 file(GLOB_RECURSE my_c_list RELATIVE ${CMAKE_SOURCE_DIR} "app/*")
@@ -75,6 +80,7 @@ foreach(file_path ${my_c_list})
                         ${YAML_CPP_INCLUDE_DIR}
                         ${CERES_INCLUDE_DIRS}
                         ${PYTHON_INCLUDE_DIRS}
+                        ${Open3D_INCLUDE_DIRS}
                         )
 
     target_link_libraries(${filename}
@@ -85,6 +91,7 @@ foreach(file_path ${my_c_list})
                         ${CERES_LIBRARIES}
                         ${YAML_CPP_LIBRARIES}
                         ${PYTHON_LIBRARIES}
+                        ${Open3D_LIBRARIES}
                         )
 
 endforeach()
